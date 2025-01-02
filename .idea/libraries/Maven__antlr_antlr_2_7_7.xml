@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="Maven: antlr:antlr:2.7.7">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.7/antlr-2.7.7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.7/antlr-2.7.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/Eureka/src/main/java" />
+      <root url="file://$PROJECT_DIR$/Eureka/src/test/java" />
+      <root url="file://$PROJECT_DIR$/getway/src/main/java" />
+      <root url="file://$PROJECT_DIR$/getway/src/test/java" />
+      <root url="file://$PROJECT_DIR$/users/src/main/java" />
+      <root url="file://$PROJECT_DIR$/users/src/test/java" />
+      <root url="file://$PROJECT_DIR$/vehicle/src/main/java" />
+      <root url="file://$PROJECT_DIR$/vehicle/src/test/java" />
+      <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.7/antlr-2.7.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

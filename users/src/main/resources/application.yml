@@ -1,0 +1,20 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: user-service
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/vl  # URL de connexion à MongoDB
+      database: users  # Nom de la base de données
+  spring:
+    profiles:
+      active: dev
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ # URL du serveur Eureka
+    register-with-eureka: true # (par défaut true) permet l'enregistrement
+    fetch-registry: true # Active la récupération des informations des services enregistrés

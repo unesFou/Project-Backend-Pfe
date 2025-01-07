@@ -47,5 +47,10 @@ public class UserController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/users/vehicle/{id}")
+    public String getVehicleInfo(@PathVariable("id") String vehicleId) {
+        return userService.getVehicleInfo(vehicleId);
+    }
 }
 

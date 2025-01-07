@@ -5,6 +5,8 @@ import com.pfe.users.model.User;
 import com.pfe.users.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.pfe.users.clients.VehicleClient;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +16,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    private VehicleClient vehicleClient;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -41,6 +45,10 @@ public class UserService {
             userRepository.delete(user);
             return true;
         }).orElse(false);
+    }
+
+    public String getVehicleInfo(String vehicleId) {
+        return vehicleClient.getVehicleById(vehicleId);
     }
 }
 

@@ -3,18 +3,18 @@ server:
 spring:
   application:
     name: user-service
+  cloud:
+    discovery:
+      enabled: true
 
   data:
     mongodb:
-      uri: mongodb://localhost:27017/vl  # URL de connexion à MongoDB
-      database: users  # Nom de la base de données
-  spring:
-    profiles:
-      active: dev
+      uri: mongodb://localhost:27017/vl
+      database: users
 
 eureka:
   client:
+    register-with-eureka: true  # Inscrire le service dans Eureka
+    fetch-registry: true  # Récupérer le registre des services
     service-url:
-      defaultZone: http://localhost:8761/eureka/ # URL du serveur Eureka
-    register-with-eureka: false # (par défaut true) permet l'enregistrement
-    fetch-registry: false # Active la récupération des informations des services enregistrés
+      defaultZone: http://localhost:8761/eureka/  # URL de votre serveur Eureka

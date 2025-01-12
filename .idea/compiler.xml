@@ -8,14 +8,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="getway" />
+        <module name="annonce" />
+        <module name="Reservation" />
         <module name="Eureka" />
         <module name="users" />
         <module name="vehicle" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="annonce" target="17" />
       <module name="Eureka" target="17" />
       <module name="getway" target="17" />
+      <module name="Reservation" target="17" />
       <module name="users" target="17" />
       <module name="vehicle" target="17" />
     </bytecodeTargetLevel>
@@ -23,6 +27,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Eureka" options="-parameters" />
+      <module name="Reservation" options="-parameters" />
+      <module name="annonce" options="-parameters" />
       <module name="getway" options="-parameters" />
       <module name="users" options="-parameters" />
       <module name="vehicle" options="-parameters" />

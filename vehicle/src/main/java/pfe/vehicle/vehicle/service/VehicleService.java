@@ -1,6 +1,6 @@
 package pfe.vehicle.vehicle.service;
 
-import pfe.vehicle.vehicle.model.Vehicle;
+import org.springframework.beans.factory.annotation.Autowired;
 import pfe.vehicle.vehicle.repository.VehicleRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +10,12 @@ import java.util.Optional;
 @Service
 public class VehicleService {
 
-    private final VehicleRepository vehicleRepository;
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
-    public VehicleService(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
-    }
+    //public VehicleService(VehicleRepository vehicleRepository) {
+    //    this.vehicleRepository = vehicleRepository;
+    //}
 
     // Récupérer tous les véhicules
     public List<Vehicle> getAllVehicles() {
@@ -23,11 +24,11 @@ public class VehicleService {
 
     // Récupérer un véhicule par ID
     public Optional<Vehicle> getVehicleById(String id) {
-        return vehicleRepository.findById(id.toString()); // Utilisation de String pour l'ID dans MongoDB
+        return vehicleRepository.findById(id.toString());
     }
 
     // Sauvegarder un véhicule
-    public Vehicle save(Vehicle vehicle) {
+    public Vehicle saveVehicule(Vehicle vehicle) {
         return vehicleRepository.save(vehicle);
     }
 

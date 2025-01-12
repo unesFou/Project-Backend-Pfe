@@ -1,20 +1,46 @@
-server :
-  port : 9999
+server:
+  port: 9999
+
 spring:
   application:
     name: api-gateway
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-cloud:
-  gateway:
-    routes:
-      - id: users
-        uri: lb://user-service # lb indique un Load Balancer
-        predicates:
-          - Path=/user-service/**
-      - id: vehicle
-        uri: lb://vehicle-service
-        predicates:
-          - Path=/vehicle-service/**
+  eureka:
+    client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka/
+  cloud:
+    gateway:
+      routes:
+        - id: users
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/**
+          filters:
+            - RewritePath=/user-service/(?<remaining>.*), /${remaining}
+
+        - id: vehicle
+          uri: lb://vehicle-service
+          predicates:
+            - Path=/vehicle-service/**
+          filters:
+            - RewritePath=/vehicle-service/(?<remaining>.*), /${remaining}
+
+        - id: annonce
+          uri: lb://annonce-service
+          predicates:
+            - Path=/annonce-service/**
+          filters:
+            - RewritePath=/annonce-service/(?<remaining>.*), /${remaining}
+
+        - id: reservation
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/**
+          filters:
+            - RewritePath=/reservation-service/(?<remaining>.*), /${remaining}
+
+  logging:
+    level:
+      org.springframework.cloud.gateway: DEBUG
+      org.springframework.web: DEBUG
+      org.springframework.cloud: DEBUG

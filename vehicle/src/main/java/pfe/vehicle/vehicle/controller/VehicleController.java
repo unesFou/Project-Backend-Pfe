@@ -1,6 +1,6 @@
 package pfe.vehicle.vehicle.controller;
 
-import pfe.vehicle.vehicle.model.Vehicle;
+import org.springframework.beans.factory.annotation.Autowired;
 import pfe.vehicle.vehicle.service.VehicleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,8 @@ import java.util.List;
 @RequestMapping("/api")
 public class VehicleController {
 
-    private final VehicleService vehicleService;
+    @Autowired
+    VehicleService vehicleService;
 
     public VehicleController(VehicleService vehicleService) {
         this.vehicleService = vehicleService;

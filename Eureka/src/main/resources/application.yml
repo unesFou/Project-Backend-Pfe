@@ -8,5 +8,16 @@ eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
   server:
     wait-time-in-ms-when-sync-empty: 0
+    eviction-interval-timer-in-ms: 60000
+  instance:
+    health-check-url-path: /actuator/health
+    status-page-url-path: /actuator/info
+
+logging:
+  level:
+    com.netflix.eureka: DEBUG
+    org.springframework.cloud.netflix.eureka: DEBUG

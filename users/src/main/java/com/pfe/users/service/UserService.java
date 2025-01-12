@@ -1,6 +1,5 @@
 package com.pfe.users.service;
 
-
 import com.pfe.users.model.User;
 import com.pfe.users.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
     private VehicleClient vehicleClient;
 
     public List<User> getAllUsers() {

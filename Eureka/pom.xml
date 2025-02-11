@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <spring-cloud.version>2023.0.4</spring-cloud.version> <!-- Version compatible -->
+        <spring-cloud.version>2023.0.5</spring-cloud.version> <!-- Version compatible -->
     </properties>
 
     <dependencies>

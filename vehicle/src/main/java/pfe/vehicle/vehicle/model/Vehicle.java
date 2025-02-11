@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Vehicle {
 
     @Id
-    private Long id;
+    private String id;
     private String licensePlate;
     private String make;
     private String model;

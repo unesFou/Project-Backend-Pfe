@@ -14,9 +14,10 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private VehicleClient vehicleClient;
+    UserRepository userRepository;
+
+//    @Autowired
+//    private VehicleClient vehicleClient;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -46,8 +47,8 @@ public class UserService {
         }).orElse(false);
     }
 
-    public String getVehicleInfo(String vehicleId) {
-        return vehicleClient.getVehicleById(vehicleId);
-    }
+   // public String getVehicleInfo(String vehicleId) {
+//        return vehicleClient.getVehicleById(vehicleId);
+//    }
 }
 

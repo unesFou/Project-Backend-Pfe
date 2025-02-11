@@ -1,8 +1,9 @@
 package pfe.vehicle.vehicle.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import pfe.vehicle.vehicle.repository.VehicleRepository;
 import org.springframework.stereotype.Service;
+import pfe.vehicle.vehicle.model.Vehicle;
+import pfe.vehicle.vehicle.repository.VehicleRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,7 @@ import java.util.Optional;
 public class VehicleService {
 
     @Autowired
-    private VehicleRepository vehicleRepository;
+    VehicleRepository vehicleRepository;
 
     //public VehicleService(VehicleRepository vehicleRepository) {
     //    this.vehicleRepository = vehicleRepository;

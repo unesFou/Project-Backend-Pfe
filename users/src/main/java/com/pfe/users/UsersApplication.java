@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication(scanBasePackages = "com.pfe.users")
 //@SpringBootApplication
 //@EnableDiscoveryClient
-//@EnableFeignClients
+@EnableFeignClients
 public class UsersApplication {
 
     public static void main(String[] args) {

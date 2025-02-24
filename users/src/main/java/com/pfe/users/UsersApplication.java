@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-
-//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-@EnableDiscoveryClient
+@SpringBootApplication(scanBasePackages = "com.pfe.users")
+//@SpringBootApplication
+//@EnableDiscoveryClient
 //@EnableFeignClients
 public class UsersApplication {
 

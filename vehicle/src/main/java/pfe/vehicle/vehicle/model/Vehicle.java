@@ -16,5 +16,6 @@ public class Vehicle {
     private String make;
     private String model;
     private int year;
+    private String userId; // Clé étrangère pour relier un véhicule à un utilisateur
 }
 

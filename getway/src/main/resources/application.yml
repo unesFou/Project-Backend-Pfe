@@ -39,6 +39,13 @@ spring:
           filters:
             - RewritePath=/reservation-service/(?<remaining>.*), /${remaining}
 
+        - id: appartement
+          uri: lb://appartement-service
+          predicates:
+            - Path=/appartement-service/**
+          filters:
+            - RewritePath=/appartement-service/(?<remaining>.*), /${remaining}
+
   logging:
     level:
       org.springframework.cloud.gateway: DEBUG

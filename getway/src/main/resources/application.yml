@@ -11,36 +11,36 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: users
-          uri: lb://user-service
+        - id: user-service
+          uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/**
           filters:
             - RewritePath=/user-service/(?<remaining>.*), /${remaining}
 
-        - id: vehicle
-          uri: lb://vehicle-service
+        - id: vehicle-service
+          uri: lb://VEHICLE-SERVICE
           predicates:
             - Path=/vehicle-service/**
           filters:
             - RewritePath=/vehicle-service/(?<remaining>.*), /${remaining}
 
-        - id: annonce
-          uri: lb://annonce-service
+        - id: annonce-service
+          uri: lb://ANNONCE-SERVICE
           predicates:
             - Path=/annonce-service/**
           filters:
             - RewritePath=/annonce-service/(?<remaining>.*), /${remaining}
 
-        - id: reservation
-          uri: lb://reservation-service
+        - id: reservation-service
+          uri: lb://RESERVATION-SERVICE
           predicates:
             - Path=/reservation-service/**
           filters:
             - RewritePath=/reservation-service/(?<remaining>.*), /${remaining}
 
-        - id: appartement
-          uri: lb://appartement-service
+        - id: appartement-service
+          uri: lb://APPARTEMENT-SERVICE
           predicates:
             - Path=/appartement-service/**
           filters:

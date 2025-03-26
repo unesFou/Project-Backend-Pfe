@@ -6,7 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/Eureka/Eureka.iml" filepath="$PROJECT_DIR$/Eureka/Eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Project-Backend-Pfe.iml" filepath="$PROJECT_DIR$/.idea/Project-Backend-Pfe.iml" />
       <module fileurl="file://$PROJECT_DIR$/Reservation/Reservation.iml" filepath="$PROJECT_DIR$/Reservation/Reservation.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Service-Annonce/annonce.iml" filepath="$PROJECT_DIR$/Service-Annonce/annonce.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/getway/getway.iml" filepath="$PROJECT_DIR$/getway/getway.iml" />
       <module fileurl="file://$PROJECT_DIR$/users/users.iml" filepath="$PROJECT_DIR$/users/users.iml" />
       <module fileurl="file://$PROJECT_DIR$/vehicle/vehicle.iml" filepath="$PROJECT_DIR$/vehicle/vehicle.iml" />

@@ -1,6 +1,5 @@
 package com.pfe.users.controller;
 
-
 import com.pfe.users.model.User;
 import com.pfe.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

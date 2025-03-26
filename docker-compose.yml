@@ -1,0 +1,107 @@
+services:
+  users:
+    build: ./users
+    container_name: user-service
+    ports:
+      - "8092:8092"
+    networks:
+      - app-network
+    depends_on:
+      - vehicle
+      - mongodb
+    environment:
+      - SPRING_DATASOURCE_URL=mongodb://mongodb:27017/users
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+
+  eureka:
+    build: ./Eureka
+    container_name: eureka
+    ports:
+      - "8761:8761"
+    networks:
+      - app-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker  # Facultatif si tu as un profil spécifique
+
+  getway:
+    build: ./getway
+    container_name: getway
+    depends_on:
+      - eureka
+    ports:
+      - "9999:9999"
+    environment:
+      - EUREKA_SERVER=http://eureka:8761/eureka/
+    networks:
+      - app-network
+
+  vehicle:
+    build: ./vehicle
+    container_name: vehicle-service
+    ports:
+      - "8091:8091"
+    networks:
+      - app-network
+    depends_on:
+      - eureka
+      - mongodb
+    environment:
+      - SPRING_DATASOURCE_URL=mongodb://mongodb:27017/vehicules
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+
+  apartment:
+    build: ./Appartement
+    container_name: appartement-service
+    ports:
+      - "8088:8088"
+    networks:
+      - app-network
+    depends_on:
+      - eureka
+      - mongodb
+    environment:
+      - SPRING_DATASOURCE_URL=mongodb://mongodb:27017/appartments
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+
+  reservation:
+    build: ./Reservation
+    container_name: reservation-service
+    ports:
+      - "8084:8084"
+    networks:
+      - app-network
+    depends_on:
+      - eureka
+      - mongodb
+    environment:
+      - SPRING_DATASOURCE_URL=mongodb://mongodb:27017/reservation
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+
+
+  annonce-service:
+    build: ./annonce-service
+    container_name: annonce-service
+    ports:
+      - "8083:8083"
+    networks:
+      - app-network
+    depends_on:
+      - eureka
+      - mongodb
+    environment:
+      - SPRING_DATASOURCE_URL=mongodb://mongodb:27017/annonce
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+
+
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+

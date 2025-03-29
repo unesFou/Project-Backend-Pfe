@@ -1,21 +1,31 @@
 server:
   port: 8761
+
 spring:
   cloud:
     compatibility-verifier:
       enabled: false
+    config:
+      uri: http://127.0.0.1:9998
+      name: config-server
+
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: true
+    register-with-eureka: false
+    fetch-registry: false
     lease-renewal-interval-in-seconds: 30
     lease-expiration-duration-in-seconds: 90
+
   server:
     wait-time-in-ms-when-sync-empty: 0
     eviction-interval-timer-in-ms: 60000
+
   instance:
+    hostname: eureka
+    prefer-ip-address: false
+    health-check-url: http://eureka:8761/actuator/health  # Add this
     health-check-url-path: /actuator/health
-    status-page-url-path: /actuator/info
+    #status-page-url-path: /actuator/info
 
 logging:
   level:

@@ -13,6 +13,7 @@
         <module name="Reservation" />
         <module name="Eureka" />
         <module name="users" />
+        <module name="Service-Annonce" />
         <module name="vehicle" />
       </profile>
     </annotationProcessing>
@@ -23,6 +24,7 @@
       <module name="Eureka" target="17" />
       <module name="getway" target="17" />
       <module name="Reservation" target="17" />
+      <module name="Service-Annonce" target="17" />
       <module name="users" target="17" />
       <module name="vehicle" target="17" />
       <module name="wrapper" target="1.5" />
@@ -33,6 +35,7 @@
       <module name="Appartement" options="-parameters" />
       <module name="Eureka" options="-parameters" />
       <module name="Reservation" options="-parameters" />
+      <module name="Service-Annonce" options="-parameters" />
       <module name="annonce" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="getway" options="-parameters" />

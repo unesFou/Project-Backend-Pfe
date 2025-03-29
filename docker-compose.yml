@@ -1,4 +1,64 @@
 services:
+  git-server:
+    image: alpine/git
+    container_name: git-server
+    volumes:
+      - ./config-repo:/git
+    command: [ "sh", "-c", "cd /git && git init && git add . && git commit -m 'Initial commit'" ]
+    networks:
+      - app-network
+
+  eureka:
+    build: ./eureka
+    container_name: eureka
+    ports:
+      - "8761:8761"
+    networks:
+      - app-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    healthcheck:
+      test: [ "CMD-SHELL", "wget --spider -q http://localhost:8761/actuator/health || exit 0" ]
+      interval: 20s
+      retries: 10
+      start_period: 120s
+
+  config-server:
+    build: ./config-server
+    container_name: config-server
+    ports:
+      - "9998:9998"
+    networks:
+      - app-network
+    depends_on:
+      eureka:
+        condition: service_healthy
+      git-server:
+        condition: service_started
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+    healthcheck:
+      test: [ "CMD-SHELL", "wget --spider -q http://localhost:9998/actuator/health || exit 0" ]
+      interval: 15s
+      start_period: 60s
+      retries: 5
+
+  getway:
+    build: ./getway
+    container_name: getway
+    ports:
+      - "9999:9999"
+    networks:
+      - app-network
+    depends_on:
+      eureka:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+
   users:
     build: ./users
     container_name: user-service
@@ -7,33 +67,14 @@ services:
     networks:
       - app-network
     depends_on:
-      - vehicle
-      - mongodb
+      eureka:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=mongodb://mongodb:27017/users
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
-
-  eureka:
-    build: ./Eureka
-    container_name: eureka
-    ports:
-      - "8761:8761"
-    networks:
-      - app-network
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker  # Facultatif si tu as un profil spécifique
-
-  getway:
-    build: ./getway
-    container_name: getway
-    depends_on:
-      - eureka
-    ports:
-      - "9999:9999"
-    environment:
-      - EUREKA_SERVER=http://eureka:8761/eureka/
-    networks:
-      - app-network
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
 
   vehicle:
     build: ./vehicle
@@ -43,40 +84,48 @@ services:
     networks:
       - app-network
     depends_on:
-      - eureka
-      - mongodb
+      eureka:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=mongodb://mongodb:27017/vehicules
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
 
   apartment:
-    build: ./Appartement
+    build: ./appartement
     container_name: appartement-service
     ports:
       - "8088:8088"
     networks:
       - app-network
     depends_on:
-      - eureka
-      - mongodb
+      eureka:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=mongodb://mongodb:27017/appartments
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
 
   reservation:
-    build: ./Reservation
+    build: ./reservation
     container_name: reservation-service
     ports:
       - "8084:8084"
     networks:
       - app-network
     depends_on:
-      - eureka
-      - mongodb
+      eureka:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=mongodb://mongodb:27017/reservation
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
-
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
 
   annonce-service:
     build: ./annonce-service
@@ -86,22 +135,29 @@ services:
     networks:
       - app-network
     depends_on:
-      - eureka
-      - mongodb
+      eureka:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=mongodb://mongodb:27017/annonce
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
-
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
 
   mongodb:
     image: mongo:6
     container_name: mongodb
+    user : root
     ports:
       - "27017:27017"
     networks:
       - app-network
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      retries: 3
+      start_period: 20s
 
 networks:
   app-network:
     driver: bridge
-

@@ -6,7 +6,7 @@ spring:
     compatibility-verifier:
       enabled: false
     config:
-      uri: http://127.0.0.1:9998
+      uri: http://config-server:9998
       name: config-server
 
 eureka:

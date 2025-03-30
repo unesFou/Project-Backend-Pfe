@@ -59,7 +59,7 @@ services:
       - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
 
-  users:
+  user-service:
     build: ./users
     container_name: user-service
     ports:
@@ -76,7 +76,7 @@ services:
     environment:
       - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
 
-  vehicle:
+  vehicle-service:
     build: ./vehicle
     container_name: vehicle-service
     ports:
@@ -93,7 +93,7 @@ services:
     environment:
       - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
 
-  apartment:
+  appartement-service:
     build: ./appartement
     container_name: appartement-service
     ports:
@@ -110,7 +110,7 @@ services:
     environment:
       - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
 
-  reservation:
+  reservation-service:
     build: ./reservation
     container_name: reservation-service
     ports:

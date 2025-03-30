@@ -1,10 +1,26 @@
+curl -v http://localhost:9998/user-service/default
+
+
 docker-compose down --rmi all -v
 docker system prune -af
 docker-compose build --no-cache
 docker-compose up -d
 
-
+docker system prune -a
 
 docker build -t eureka-service .
 
 docker-compose restart config-server
+
+
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+docker rmi $(docker images -q)
+docker volume rm $(docker volume ls -q)
+docker network prune -f
+docker-compose up --build
+docker-compose up --build -d
+
+docker-compose stop config-server
+docker-compose rm config-server
+docker-compose rmi config-server

@@ -3,8 +3,25 @@ services:
     image: alpine/git
     container_name: git-server
     volumes:
-      - ./config-repo:/git
-    command: [ "sh", "-c", "cd /git && git init && git add . && git commit -m 'Initial commit'" ]
+      - config-repo:/git
+    command: [
+        "sh",
+        "-c",
+        "mkdir -p /git &&
+            cd /git &&
+            # Clean existing repo if corrupted
+            rm -rf .git || true &&
+            git init --initial-branch=master &&
+            # Create configuration files
+            echo 'server:\n  port: 9998' > application.yml &&
+            echo 'spring:\n  data:\n    mongodb:\n      host: mongodb' > user-service.yml &&
+            git add . &&
+            git config --global user.email 'foughaliyouness@gmail.com' &&
+            git config --global user.name 'unesFou' &&
+            git commit -m 'Initial config' &&
+            # Keep container alive
+            tail -f /dev/null"
+    ]
     networks:
       - app-network
 
@@ -36,7 +53,11 @@ services:
       git-server:
         condition: service_started
     environment:
+      #- SPRING_CLOUD_CONFIG_SERVER_GIT_URI=file:///.git/
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/unesFou/config-repo.git
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+    volumes :
+      - config-repo:/git
     healthcheck:
       test: [ "CMD-SHELL", "wget --spider -q http://localhost:9998/actuator/health || exit 0" ]
       interval: 15s
@@ -57,7 +78,7 @@ services:
         condition: service_healthy
     environment:
       - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      #- EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
 
   user-service:
     build: ./users
@@ -158,6 +179,21 @@ services:
       retries: 3
       start_period: 20s
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.1
+    container_name: keycloak
+    command: start-dev
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    networks:
+      - app-network
+
+
 networks:
   app-network:
     driver: bridge
+volumes:
+  config-repo:

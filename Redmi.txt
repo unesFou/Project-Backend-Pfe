@@ -8,10 +8,11 @@ docker-compose up -d
 
 docker system prune -a
 
-docker build -t eureka-service .
+docker build -t appartement-service .
 
 docker-compose restart config-server
 
+docker-compose rm appartement-service
 
 docker stop $(docker ps -aq)
 docker rm $(docker ps -aq)

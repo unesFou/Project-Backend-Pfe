@@ -32,22 +32,31 @@ public class VehicleController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-//    @PostMapping
-//    public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
-//        // Sauvegarde du véhicule via le service
-//        return  vehicleService.saveVehicule(vehicle);
-//        //return ResponseEntity.status(HttpStatus.CREATED).body(savedVehicle);
-//    }
-
-    @PostMapping("/user/{userId}")
-    public Vehicle createVehicle(@PathVariable String userId, @RequestBody Vehicle vehicle) {
-        vehicle.setUserId(userId); // Associer le véhicule à l'utilisateur
-        return vehicleService.saveVehicule(vehicle);
+    @PostMapping
+    public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
+        // Sauvegarde du véhicule via le service
+        return  vehicleService.saveVehicle(vehicle);
+        //return ResponseEntity.status(HttpStatus.CREATED).body(savedVehicle);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Vehicle> updateVehicle(@PathVariable String id, @RequestBody Vehicle vehicle) {
+        try {
+            Vehicle updatedVehicle = vehicleService.updateVehicule(id, vehicle);
+            return ResponseEntity.ok(updatedVehicle);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+//    @PostMapping("/user/{userId}")
+//    public Vehicle createVehicle(@PathVariable String userId, @RequestBody Vehicle vehicle) {
+//        vehicle.setUserId(userId); // Associer le véhicule à l'utilisateur
+//        return vehicleService.saveVehicle(vehicle);
+//    }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteVehicle(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteVehicle(@PathVariable String id) {
         vehicleService.deleteVehicle(id);
         return ResponseEntity.noContent().build();
     }
@@ -57,9 +66,9 @@ public class VehicleController {
         return vehicleService.findByUserId(userId);
     }
 
-    @GetMapping("/user/{userId}/details")
-    public ResponseEntity<Map<String, Object>> getUserWithVehicles(@PathVariable String userId) {
-        return ResponseEntity.ok(vehicleService.getUserWithVehicles(userId));
-    }
+//    @GetMapping("/user/{userId}/details")
+//    public ResponseEntity<Map<String, Object>> getUserWithVehicles(@PathVariable String userId) {
+//        return ResponseEntity.ok(vehicleService.getUserWithVehicles(userId));
+//    }
 
 }

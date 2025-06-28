@@ -17,6 +17,9 @@ public class Reservation {
     private Date dateDebut;
     private Date dateFin;
     private String utilisateurId;
-    private String annonceId;
+
+    private String type; // "vehicule" ou "appartement"
+    private String annonceId; // L'id du véhicule ou de l'appartement
     private String statut;
+    private Boolean disponible;
 }

@@ -3,7 +3,7 @@ spring:
     name: reservation-service  # Doit correspondre au fichier dans Git
   cloud:
     config:
-      uri: http://config-server:9998  # URL du Config Server
+      uri:  file:///git  # URL du Config Server
       fail-fast: true  # Stopper si la config n'est pas trouvée
       retry:
         initialInterval: 3000
@@ -17,4 +17,4 @@ eureka:
       defaultZone: http://eureka:8761/eureka
   instance:
     prefer-ip-address: true
-    hostname: reservation-service
+    hostname: appartement-service

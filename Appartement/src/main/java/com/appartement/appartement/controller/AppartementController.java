@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/appartements")
@@ -75,6 +76,19 @@ public class AppartementController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+
+    @PutMapping("/update-disponible/{id}")
+    public ResponseEntity<Appartement> updateStatus(@PathVariable String id, @RequestParam Boolean disponible) {
+        Appartement updated = appartementService.updateAppartementDisponiblity(id, disponible);
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
     @GetMapping("/{id}/photo/{index}")
     public ResponseEntity<?> getPhoto(@PathVariable String id, @PathVariable int index) {

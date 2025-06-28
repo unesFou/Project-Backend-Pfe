@@ -80,22 +80,22 @@ services:
       - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
       #- EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
 
-  user-service:
-    build: ./users
-    container_name: user-service
-    ports:
-      - "8092:8092"
-    networks:
-      - app-network
-    depends_on:
-      eureka:
-        condition: service_healthy
-      mongodb:
-        condition: service_healthy
-      config-server:
-        condition: service_healthy
-    environment:
-      - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
+#  user-service:
+#    build: ./users
+#    container_name: user-service
+#    ports:
+#      - "8092:8092"
+#    networks:
+#      - app-network
+#    depends_on:
+#      eureka:
+#        condition: service_healthy
+#      mongodb:
+#        condition: service_healthy
+#      config-server:
+#        condition: service_healthy
+#    environment:
+#      - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
 
   vehicle-service:
     build: ./vehicle

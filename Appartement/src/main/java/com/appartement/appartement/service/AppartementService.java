@@ -51,4 +51,16 @@ public class AppartementService {
     public void deleteAppartement(String id) {
         appartementRepository.deleteById(id);
     }
+
+    public Optional<Appartement> findById(String id) {
+        return appartementRepository.findById(id);
+    }
+
+    public Appartement updateAppartementDisponiblity(String id, Boolean disponible) {
+        return appartementRepository.findById(id).map(app -> {
+            app.setDisponible(disponible);
+            return appartementRepository.save(app);
+        }).orElse(null);
+    }
+
 }

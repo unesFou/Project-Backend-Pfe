@@ -1,11 +1,9 @@
 package com.pfe.users.service;
 
-import com.pfe.users.dto.VehicleDTO;
-import com.pfe.users.model.User;
-import com.pfe.users.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.pfe.users.clients.VehicleClient;
+
 
 
 import java.util.List;
@@ -17,8 +15,8 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    VehicleClient vehicleClient; // Injection du Feign Client
+//    @Autowired
+//    VehicleClient vehicleClient; // Injection du Feign Client
 
 //    @Autowired
 //    private VehicleClient vehicleClient;
@@ -51,23 +49,23 @@ public class UserService {
         }).orElse(false);
     }
 
-    public UserService(UserRepository userRepository, VehicleClient vehicleClient) {
-        this.userRepository = userRepository;
-        this.vehicleClient = vehicleClient;
-    }
+//    public UserService(UserRepository userRepository, VehicleClient vehicleClient) {
+//        this.userRepository = userRepository;
+//        this.vehicleClient = vehicleClient;
+//    }
+//
+//    public List<VehicleDTO> getUserVehicles(String userId) {
+//        return vehicleClient.getVehiclesByUser(userId);
+//    }
+//
+//    public VehicleDTO addVehicleForUser(String userId, VehicleDTO vehicleDTO) {
+//        vehicleDTO.setUserId(userId);
+//        return vehicleClient.addVehicle(vehicleDTO);
+//    }
 
-    public List<VehicleDTO> getUserVehicles(String userId) {
-        return vehicleClient.getVehiclesByUser(userId);
-    }
-
-    public VehicleDTO addVehicleForUser(String userId, VehicleDTO vehicleDTO) {
-        vehicleDTO.setUserId(userId);
-        return vehicleClient.addVehicle(vehicleDTO);
-    }
-
-    public void deleteVehicle(String vehicleId) {
-        vehicleClient.deleteVehicle(vehicleId);
-    }
+//    public void deleteVehicle(String vehicleId) {
+//        vehicleClient.deleteVehicle(vehicleId);
+//    }
 
 }
 

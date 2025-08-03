@@ -25,3 +25,14 @@ docker-compose up --build -d
 docker-compose stop config-server
 docker-compose rm config-server
 docker-compose rmi config-server
+
+docker-compose down -v
+docker-compose build
+docker-compose up
+
+docker logs
+
+docker compose down --volumes --remove-orphans
+docker compose build --no-cache
+docker compose up -d
+

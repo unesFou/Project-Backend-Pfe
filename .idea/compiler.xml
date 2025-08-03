@@ -8,24 +8,33 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="getway" />
-        <module name="Appartement" />
         <module name="config-server" />
+        <module name="Appartement" />
         <module name="Reservation" />
         <module name="Eureka" />
-        <module name="users" />
-        <module name="Service-Annonce" />
         <module name="vehicle" />
+      </profile>
+      <profile name="Annotation profile for userSecurity" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="userSecurity" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="annonce" target="17" />
       <module name="Appartement" target="17" />
+      <module name="backend" target="1.5" />
       <module name="config-server" target="17" />
       <module name="Eureka" target="17" />
       <module name="getway" target="17" />
       <module name="Reservation" target="17" />
       <module name="Service-Annonce" target="17" />
+      <module name="user" target="17" />
+      <module name="user-service" target="17" />
+      <module name="userReservation" target="17" />
       <module name="users" target="17" />
+      <module name="userSecurity" target="17" />
       <module name="vehicle" target="17" />
       <module name="wrapper" target="1.5" />
     </bytecodeTargetLevel>
@@ -39,6 +48,10 @@
       <module name="annonce" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="getway" options="-parameters" />
+      <module name="user" options="-parameters" />
+      <module name="user-service" options="-parameters" />
+      <module name="userReservation" options="-parameters" />
+      <module name="userSecurity" options="-parameters" />
       <module name="users" options="-parameters" />
       <module name="vehicle" options="-parameters" />
     </option>

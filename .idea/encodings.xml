@@ -13,8 +13,9 @@
     <file url="file://$PROJECT_DIR$/config-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/getway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/getway/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/users/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/users/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/userReservation/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/userReservation/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/userSecurity/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/vehicle/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/vehicle/src/main/resources" charset="UTF-8" />
   </component>

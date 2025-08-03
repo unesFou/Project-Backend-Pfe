@@ -1,0 +1,23 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: user-service
+  cloud:
+    discovery:
+      enabled: true
+
+  data:
+    mongodb:
+      uri: mongodb://mongodb:27017/user
+      database: userReservation
+
+eureka:
+  client:
+    register-with-eureka: true  # Inscrire le service dans Eureka
+    fetch-registry: true  # Récupérer le registre des services
+    service-url:
+      defaultZone: http://eureka:8761/eureka  # URL de votre serveur Eureka
+
+jwt:
+  secret: ${JWT_SECRET}

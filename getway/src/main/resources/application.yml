@@ -20,12 +20,12 @@ spring:
         maxAttempts: 20
     gateway:
       routes:
-        - id: user-service
-          uri: lb://USER-SERVICE
-          predicates:
-            - Path=/user-service/**
-          filters:
-            - RewritePath=/user-service/(?<remaining>.*), /${remaining}
+#        - id: user-service
+#          uri: lb://USER-SERVICE
+#          predicates:
+#            - Path=/user-service/**
+#          filters:
+#            - RewritePath=/user-service/(?<remaining>.*), /${remaining}
 
         - id: vehicle-service
           uri: lb://VEHICLE-SERVICE
@@ -54,6 +54,13 @@ spring:
             - Path=/appartement-service/**
           filters:
             - RewritePath=/appartement-service/(?<remaining>.*), /${remaining}
+
+        - id: user-security
+          uri: lb://USER-SECURITY
+          predicates:
+            - Path=/user-security/**
+          filters:
+            - RewritePath=/user-security/(?<remaining>.*), /${remaining}
 
   logging:
     level:

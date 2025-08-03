@@ -80,22 +80,23 @@ services:
       - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
       #- EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
 
-#  user-service:
-#    build: ./users
-#    container_name: user-service
-#    ports:
-#      - "8092:8092"
-#    networks:
-#      - app-network
-#    depends_on:
-#      eureka:
-#        condition: service_healthy
-#      mongodb:
-#        condition: service_healthy
-#      config-server:
-#        condition: service_healthy
-#    environment:
-#      - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
+  user-security:
+    build: ./userSecurity
+    container_name: userSecurity-service
+    ports:
+      - "8068:8068"
+    networks:
+      - app-network
+    depends_on:
+      eureka:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
+      #- JWT_SECRET= my-secret-key
 
   vehicle-service:
     build: ./vehicle
@@ -148,23 +149,6 @@ services:
     environment:
       - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
 
-  annonce-service:
-    build: ./annonce-service
-    container_name: annonce-service
-    ports:
-      - "8083:8083"
-    networks:
-      - app-network
-    depends_on:
-      eureka:
-        condition: service_healthy
-      mongodb:
-        condition: service_healthy
-      config-server:
-        condition: service_healthy
-    environment:
-      - SPRING_CLOUD_CONFIG_URI=http://config-server:9998
-
   mongodb:
     image: mongo:6
     container_name: mongodb
@@ -179,17 +163,38 @@ services:
       retries: 3
       start_period: 20s
 
-  keycloak:
-    image: quay.io/keycloak/keycloak:24.0.1
-    container_name: keycloak
-    command: start-dev
-    ports:
-      - "8080:8080"
-    environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-    networks:
-      - app-network
+#  keycloak:
+#    image: quay.io/keycloak/keycloak:24.0.1
+#    container_name: keycloak
+#    command: start-dev
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      KEYCLOAK_ADMIN: admin
+#      KEYCLOAK_ADMIN_PASSWORD: admin
+#    networks:
+#      - app-network
+
+#  n8n:
+#    image: n8nio/n8n
+#    container_name: n8n
+#    restart: always
+#    ports:
+#      - "5678:5678"
+#    environment:
+#      - DB_TYPE=sqlite
+#      - N8N_BASIC_AUTH_ACTIVE=true
+#      - N8N_BASIC_AUTH_USER=admin
+#      - N8N_BASIC_AUTH_PASSWORD=admin
+#      - N8N_HOST=n8n.local
+#      - WEBHOOK_URL=http://localhost:5678
+#    volumes:
+#      - n8n_data:/home/node/.n8n
+#    networks:
+#      - app-network
+#    depends_on:
+#      - mongodb
+
 
 
 networks:
@@ -197,3 +202,4 @@ networks:
     driver: bridge
 volumes:
   config-repo:
+  n8n_data:

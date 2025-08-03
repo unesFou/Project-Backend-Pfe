@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: user-security  # Doit correspondre au fichier dans Git
+  cloud:
+    config:
+      #uri: http://config-server:9998  # URL du Config Server
+      uri: file:///git
+      fail-fast: true  # Stopper si la config n'est pas trouvée
+      retry:
+        initialInterval: 3000
+        multiplier: 1.3
+        maxInterval: 5000
+        maxAttempts: 20
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:8761/eureka
+  instance:
+    prefer-ip-address: true
+    hostname: user-security
